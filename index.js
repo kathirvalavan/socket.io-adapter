@@ -63,6 +63,10 @@ Adapter.prototype.del = function(id, room, fn){
   this.rooms[room] = this.rooms[room] || {};
   delete this.sids[id][room];
   delete this.rooms[room][id];
+  if (this.rooms.hasOwnProperty(room) && !Object.keys(this.rooms[room]).length) {
+    delete this.rooms[room];
+  }
+
   if (fn) process.nextTick(fn.bind(null, null));
 };
 
@@ -77,7 +81,13 @@ Adapter.prototype.delAll = function(id, fn){
   var rooms = this.sids[id];
   if (rooms) {
     for (var room in rooms) {
-      delete this.rooms[room][id];
+      if (rooms.hasOwnProperty(room)) {
+        delete this.rooms[room][id];
+      }
+
+      if (this.rooms.hasOwnProperty(room) && !Object.keys(this.rooms[room]).length) {
+        delete this.rooms[room];
+      }
     }
   }
   delete this.sids[id];
