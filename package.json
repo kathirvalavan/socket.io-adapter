@@ -3,7 +3,7 @@
   "version": "0.3.1",
   "repository": {
     "type": "git",
-    "url": "git://github.com/sathappan/socket.io-adapter.git"
+    "url": "git://github.com/navaneeth00/socket.io-adapter.git"
   },
   "description": "",
   "dependencies": {
